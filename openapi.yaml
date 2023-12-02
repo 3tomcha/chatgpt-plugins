@@ -6,17 +6,17 @@ info:
 servers:
   - url: http://localhost:5003
 paths:
-  /todos/{username}:
+  /abi/{contractAddress}:
     get:
-      operationId: getTodos
-      summary: Get the list of todos
+      operationId: getAbiContractAddress
+      summary: Get abi by contract_address
       parameters:
       - in: path
-        name: username
+        name: contractAddress
         schema:
             type: string
         required: true
-        description: The name of the user.
+        description: Target contract address.
       responses:
         "200":
           description: OK
@@ -66,28 +66,9 @@ paths:
 components:
   schemas:
     getTodosResponse:
-      type: object
-      properties:
-        todos:
-          type: array
-          items:
+      schema:
+        type: object
+        properties:
+          abi:
             type: string
-          description: The list of todos.
-    addTodoRequest:
-      type: object
-      required:
-      - todo
-      properties:
-        todo:
-          type: string
-          description: The todo to add to the list.
-          required: true
-    deleteTodoRequest:
-      type: object
-      required:
-      - todo_idx
-      properties:
-        todo_idx:
-          type: integer
-          description: The index of the todo to delete.
-          required: true
+            description: A JSON-formatted string representing the ABI of a smart contract
